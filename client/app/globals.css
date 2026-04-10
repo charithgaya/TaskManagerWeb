@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ✅ LIGHT THEME */
+@layer base {
+  :root {
+  --radius: 0.625rem;
+
+  /* Base */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+
+  /* Card */
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+
+  /* Popover */
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+
+  /* ✅ PRIMARY (Purple Theme) */
+  --primary: 262 83% 58%;          /* nice purple */
+  --primary-foreground: 0 0% 100%;
+
+  /* Secondary */
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
+
+  /* Muted */
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
+
+  /* Accent */
+  --accent: 210 40% 96%;
+  --accent-foreground: 222 47% 11%;
+
+  /* Danger */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+
+  /* Borders */
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 262 83% 58%;
+
+  /* Sidebar (optional) */
+  --sidebar: 210 40% 98%;
+  --sidebar-foreground: 222 47% 11%;
+
+  --chart-1: 15 85% 55%;
+  --chart-2: 185 55% 50%;
+  --chart-3: 227 40% 35%;
+  --chart-4: 85 75% 70%;
+  --chart-5: 70 70% 65%;
+}
+  
+  /* ✅ DARK THEME  */
+  .dark {
+  --background: 222 47% 11%;
+  --foreground: 0 0% 100%;
+
+  --card: 222 47% 13%;
+  --card-foreground: 0 0% 100%;
+
+  --popover: 222 47% 13%;
+  --popover-foreground: 0 0% 100%;
+
+  /* ✅ Slightly brighter purple for dark mode */
+  --primary: 262 70% 65%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 217 33% 17%;
+  --secondary-foreground: 0 0% 100%;
+
+  --muted: 217 33% 17%;
+  --muted-foreground: 215 20% 65%;
+
+  --accent: 217 33% 17%;
+  --accent-foreground: 0 0% 100%;
+
+  --destructive: 0 70% 50%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 217 33% 20%;
+  --input: 217 33% 20%;
+  --ring: 262 70% 65%;
+
+  --sidebar: 222 47% 13%;
+  --sidebar-foreground: 0 0% 100%;
+
+  --chart-1: 15 85% 55%;
+  --chart-2: 185 55% 50%;
+  --chart-3: 227 40% 35%;
+  --chart-4: 85 75% 70%;
+  --chart-5: 70 70% 65%;
+}
+  
+}
+
+/* ✅ Inline mapping (Optional Mapping)*/
+/* @theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+} */
+
+/* Body */
+body {
+  font-family: "Inter", sans-serif;
+  @apply bg-background text-foreground;
+}
+
+/* .auth-page {
+  height: 100vh;
+  background: url("../public/glass-bg.png") no-repeat center center fixed;
+} */
+
+/* .auth-page form{
+  position: relative;
+  box-shadow: 2px 3px 15px rgba(0, 0, 0, 0.08);
+} */
+
+.auth-page > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  opacity: 0.12;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Utilities */
+.u-triangle::before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -7px;
+  top: 50%;
+  border-top: 5px solid transparent;
+  border-right: 8px solid #3aafae;
+  border-bottom: 5px solid transparent;
+  transform: translateY(-50%);
+}
+
+.main-layout::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Example spacing system */
+.section {
+  padding: 1.5rem;
+}
+
+.container {
+  gap: 1.5rem;
+}
+
+
+
+

@@ -14,7 +14,7 @@ export const registerUser = asyncHandler(async (req, res) => {
   //validation
   if (!name || !email || !password) {
     // 400 Bad Request
-    res.status(400).json({ message: "All fields are required" });
+    return res.status(400).json({ message: "All fields are required" });
   }
 
   // check password length
@@ -42,31 +42,19 @@ export const registerUser = asyncHandler(async (req, res) => {
   // generate token with user id
   const token = generateToken(user._id);
 
-  // send back the user and token in the response to the client
-  res.cookie("token", token, {
-    path: "/",
-    httpOnly: true,
-    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-    sameSite: "none", // cross-site access --> allow all third-party cookies
-    secure: true,
-  });
-
   if (user) {
-    const { _id, name, email, role, photo, bio, isVerified } = user;
+    const { _id, name, email } = user;
 
     // 201 Created
     res.status(201).json({
       _id,
       name,
       email,
-      role,
-      photo,
-      bio,
-      isVerified,
       token,
     });
+
   } else {
-    res.status(400).json({ message: "Invalid user data" });
+    return res.status(400).json({ message: "Invalid user data" });
   }
 });
 
@@ -82,14 +70,14 @@ export const loginUser = asyncHandler(async (req, res) => {
   }
 
   // check if user exists
-  const userExists = await User.findOne({ email });
+  const user = await User.findOne({ email });
 
-  if (!userExists) {
+  if (!user) {
     return res.status(404).json({ message: "User not found, sign up!" });
   }
 
   // check id the password match the hashed password in the database
-  const isMatch = await bcrypt.compare(password, userExists.password);
+  const isMatch = await bcrypt.compare(password, user.password);
 
   if (!isMatch) {
     // 400 Bad Request
@@ -97,46 +85,42 @@ export const loginUser = asyncHandler(async (req, res) => {
   }
 
   // generate token with user id
-  const token = generateToken(userExists._id);
+  const token = generateToken(user._id);
 
-  if (userExists && isMatch) {
-    const { _id, name, email, role, photo, bio, isVerified } = userExists;
+    // if (userExists && isMatch) {
+    //   const { _id, name, email, role, photo, bio, isVerified } = userExists;
 
-    // set the token in the cookie
-    res.cookie("token", token, {
-      path: "/",
-      httpOnly: true,
-      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-      sameSite: "none", // cross-site access --> allow all third-party cookies
-      secure: true,
-    });
-
-    // send back the user and token in the response to the client
-    res.status(200).json({
-      _id,
-      name,
-      email,
-      role,
-      photo,
-      bio,
-      isVerified,
+    //   // send back the user and token in the response to the client
+    //   res.status(200).json({
+    //     _id,
+    //     name,
+    //     email,
+    //     role,
+    //     photo,
+    //     bio,
+    //     isVerified,
+    //     token,
+    //   });
+    // } else {
+    //   res.status(400).json({ message: "Invalid email or password" });
+    // }
+    return res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      photo: user.photo,
+      bio: user.bio,
+      isVerified: user.isVerified,
       token,
-    });
-  } else {
-    res.status(400).json({ message: "Invalid email or password" });
-  }
+  });
+
 });
 
 // logout user
 export const logoutUser = asyncHandler(async (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    sameSite: "none",
-    secure: true,
-    path: "/",
-  });
-
-  res.status(200).json({ message: "User logged out" });
+  
+  return res.status(200).json({ message: "User logged out" });
 });
 
 // get user
@@ -184,18 +168,19 @@ export const updateUser = asyncHandler(async (req, res) => {
 
 // login status
 export const userLoginStatus = asyncHandler(async (req, res) => {
-  const token = req.cookies.token;
+  const authHeader = req.headers.authorization;
 
-  if (!token) {
-    // 401 Unauthorized
-    res.status(401).json({ message: "Not authorized, please login!" });
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json(false);
   }
-  // verify the token
-  const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-  if (decoded) {
+  const token = authHeader.split(" ")[1];
+
+  try {
+    // verify the token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     res.status(200).json(true);
-  } else {
+  } catch {
     res.status(401).json(false);
   }
 });
@@ -301,88 +286,149 @@ export const forgotPassword = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "Email is required" });
   }
 
-  // check if user exists
   const user = await User.findOne({ email });
 
+  // ✅ Always return same message (security)
   if (!user) {
-    // 404 Not Found
-    return res.status(404).json({ message: "User not found" });
+    return res.json({
+      message: "If this email exists, a reset link has been sent",
+    });
   }
 
-  // see if reset token exists
+  // delete old token if exists
   let token = await Token.findOne({ userId: user._id });
-
-  // if token exists --> delete the token
   if (token) {
     await token.deleteOne();
   }
 
-  // create a reset token using the user id ---> expires in 1 hour
-  const passwordResetToken = crypto.randomBytes(64).toString("hex") + user._id;
+  // create new token
+  const passwordResetToken =
+    crypto.randomBytes(64).toString("hex") + user._id;
 
-  // hash the reset token
   const hashedToken = hashToken(passwordResetToken);
 
   await new Token({
     userId: user._id,
     passwordResetToken: hashedToken,
     createdAt: Date.now(),
-    expiresAt: Date.now() + 60 * 60 * 1000, // 1 hour
+    expiresAt: Date.now() + 60 * 60 * 1000,
   }).save();
 
-  // reset link
   const resetLink = `${process.env.CLIENT_URL}/reset-password/${passwordResetToken}`;
 
-  // send email to user
-  const subject = "Password Reset - AuthKit";
-  const send_to = user.email;
-  const send_from = process.env.USER_EMAIL;
-  const reply_to = "noreply@noreply.com";
-  const template = "forgotPassword";
-  const name = user.name;
-  const url = resetLink;
-
+  // ✅ SEND EMAIL FIRST
   try {
-    await sendEmail(subject, send_to, send_from, reply_to, template, name, url);
-    res.json({ message: "Email sent" });
+    await sendEmail(
+      "Password Reset",
+      user.email,
+      process.env.USER_EMAIL,
+      "noreply@noreply.com",
+      "forgotPassword",
+      user.name,
+      resetLink
+    );
+
+    return res.json({
+      message: "If this email exists, a reset link has been sent",
+      resetURL:
+        process.env.NODE_ENV === "development" ? resetLink : undefined,
+    });
+
   } catch (error) {
-    console.log("Error sending email: ", error);
-    return res.status(500).json({ message: "Email could not be sent" });
+    console.log("Email error:", error);
+
+    return res.status(500).json({
+      message: "Email could not be sent",
+    });
   }
 });
 
 // reset password
+// export const resetPassword = asyncHandler(async (req, res) => {
+//   const { resetPasswordToken } = req.params;
+//   const { password } = req.body;
+
+//   if (!password) {
+//     return res.status(400).json({ message: "Password is required" });
+//   }
+
+//   // hash the reset token
+//   const hashedToken = hashToken(resetPasswordToken);
+
+//   // check if token exists and has not expired
+//   const userToken = await Token.findOne({
+//     passwordResetToken: hashedToken,
+//     // check if the token has not expired
+//     expiresAt: { $gt: Date.now() },
+//   });
+
+//   if (!userToken) {
+//     return res.status(400).json({ message: "Invalid or expired reset token" });
+//   }
+
+//   // find user with the user id in the token
+//   const user = await User.findById(userToken.userId);
+
+//   // update user password
+//   user.password = password;
+//   await user.save();
+
+//   return res.status(200).json({ message: "Password reset successfully" });
+// });
+
+
 export const resetPassword = asyncHandler(async (req, res) => {
   const { resetPasswordToken } = req.params;
   const { password } = req.body;
 
-  if (!password) {
-    return res.status(400).json({ message: "Password is required" });
+  // ✅ 1. Validate password
+  if (!password || password.length < 6) {
+    return res.status(400).json({
+      message: "Password must be at least 6 characters",
+    });
   }
 
-  // hash the reset token
+  // ✅ 2. Hash token (same as when saving)
   const hashedToken = hashToken(resetPasswordToken);
 
-  // check if token exists and has not expired
+  // ✅ 3. Find valid token
   const userToken = await Token.findOne({
     passwordResetToken: hashedToken,
-    // check if the token has not expired
     expiresAt: { $gt: Date.now() },
   });
 
   if (!userToken) {
-    return res.status(400).json({ message: "Invalid or expired reset token" });
+    return res.status(400).json({
+      message: "Invalid or expired reset token",
+    });
   }
 
-  // find user with the user id in the token
+  // ✅ 4. Find user
   const user = await User.findById(userToken.userId);
 
-  // update user password
-  user.password = password;
+  if (!user) {
+    return res.status(404).json({
+      message: "User not found",
+    });
+  }
+
+  // ✅ 5. Update password
+  user.password = password; // (hashed in model pre-save)
   await user.save();
 
-  res.status(200).json({ message: "Password reset successfully" });
+  // ✅ 6. DELETE all tokens for safety
+  await Token.deleteMany({ userId: user._id });
+
+  const token = generateToken(user._id);
+  console.log("Generated JWT token: ", token);
+
+  // ✅ 7. Success response
+  return res.status(200).json({
+    message: "Password reset successfully",
+    token,
+  });
 });
+
 
 // change password
 export const changePassword = asyncHandler(async (req, res) => {
@@ -403,11 +449,10 @@ export const changePassword = asyncHandler(async (req, res) => {
   }
 
   // reset password
-  if (isMatch) {
-    user.password = newPassword;
-    await user.save();
-    return res.status(200).json({ message: "Password changed successfully" });
-  } else {
-    return res.status(400).json({ message: "Password could not be changed!" });
-  }
+  user.password = newPassword;
+  await user.save();
+
+  return res.status(200).json({ message: "Password changed successfully"
+  
+  });
 });

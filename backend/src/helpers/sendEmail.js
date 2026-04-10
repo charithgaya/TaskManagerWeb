@@ -19,7 +19,6 @@ const sendEmail = async (
   link
 ) => {
   const transporter = nodeMailer.createTransport({
-    service: "Outlook365",
     host: "smtp.office365.com",
     port: 587,
     secure: false,
@@ -42,14 +41,14 @@ const sendEmail = async (
   transporter.use("compile", hbs(handlebarsOptions));
 
   const mailOptions = {
-    from: send_from,
+    from: process.env.USER_EMAIL,
     to: send_to,
     replyTo: reply_to,
-    subject: subject,
-    template: template,
+    subject,
+    template,
     context: {
-      name: name,
-      link: link,
+      name,
+      link,
     },
   };
 

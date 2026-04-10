@@ -1,0 +1,21 @@
+import { FaGithub, FaStar, FaTrash, FaEdit, FaCheck, FaTimes, FaPlus, FaSun, FaMoon, FaHome } from "react-icons/fa";
+import { FaUser, FaCertificate } from "react-icons/fa6";
+import { HiOutlineMail } from "react-icons/hi";
+import { LuLogIn, LuLogOut } from "react-icons/lu";
+
+export const githubIcon = <FaGithub />;
+export const starIcon = <FaStar />;
+export const trashIcon = <FaTrash />;
+export const editIcon = <FaEdit />;
+export const checkIcon = <FaCheck />;
+export const timesIcon = <FaTimes />;
+export const plusIcon = <FaPlus />;
+export const sunIcon = <FaSun />;
+export const moonIcon = <FaMoon />;
+export const mailIcon = <HiOutlineMail />;
+export const profileIcon = <FaUser />;
+export const homeIcon = <FaHome />;
+export const badgeIcon = <FaCertificate />;
+export const closeIcon = <FaTimes />;
+export const loginIcon = <LuLogIn />;
+export const logoutIcon = <LuLogOut />;

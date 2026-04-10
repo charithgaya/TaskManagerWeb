@@ -2,10 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import connect from "./src/db/connect.js";
-import cookieParser from "cookie-parser";
 import errorHandler from "./src/helpers/errorhandler.js";
 import tasksRoutes from "./src/routes/tasksRoutes.js";
-
 import userRoutes from "./src/routes/userRoutes.js";
 
 //Load env first
@@ -18,13 +16,16 @@ const port = process.env.PORT || 8000;
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
-    credentials: true,
   })
 );
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
 
 //routes
 app.use("/api/users", userRoutes);
