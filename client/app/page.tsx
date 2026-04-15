@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <main className="m-6 h-full transition-colors duration-300">
         <div className="flex sm:flex-col md:flex-row justify-between items-center">
-          <h1 className="text-xl sm:text-md sm:text-center font-semibold text-foreground">All Tasks</h1>
+          <h1 className="text-xl sm:text-md xs:text-sm sm:text-center font-semibold text-foreground sm:mb-4">All Tasks</h1>
           <Filters />
         </div>
 
@@ -43,7 +43,7 @@ export default function Home() {
             variant="outline"
             onClick={openModalAdd}
             className="w-full min-h-[200px] min-w-[200px] border-2 border-dashed border-gray-500 h-full flex items-center justify-center text-foreground"
-            >
+          >
             + Add New Task
           </Button>
         </motion.div>

@@ -9,14 +9,22 @@ import { Input } from "@/components/ui/input";
 import Button from "@/components/ui/Button";
 
 function ResetPasswordPage() {
-  const { token } = useParams();
   const router = useRouter();
+  const params = useParams();
+  const token = params?.resetToken as string;
+
+  console.log("TOKEN:", token);
+  console.log("PARAMS: ", params);
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const serverUrl = "http://localhost:8000";
+
+  if (!token) {
+    return toast.error("Invalid reset link!");
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,7 +48,7 @@ function ResetPasswordPage() {
 
       toast.success("Password reset successful 🎉");
 
-      // ✅ redirect to login
+      localStorage.setItem("token", res.data.token);
       router.push("/login");
 
     } catch (error: any) {

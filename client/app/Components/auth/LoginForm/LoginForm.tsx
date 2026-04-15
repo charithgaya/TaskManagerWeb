@@ -8,7 +8,7 @@ function LoginForm() {
   const { email, password } = userState;
   const [showPassword, setShowPassword] = React.useState(false);
 
-  const togglePassword = () => setShowPassword(!showPassword);
+  const togglePassword = () => setShowPassword(prev => !prev);
 
   return (
     <form className="relative w-full max-w-md mx-auto p-6 sm:p-8 rounded-2xl bg-card shadow-sm">
@@ -59,13 +59,10 @@ function LoginForm() {
           />
           <button
             type="button"
-            className="absolute right-3 top-[38px] text-muted-foreground hover:text-foreground"
+            className="absolute right-3 top-9 text-sm text-gray-500"
+            onClick={togglePassword}
           >
-            {showPassword ? (
-              <i className="fas fa-eye-slash" onClick={togglePassword}></i>
-            ) : (
-              <i className="fas fa-eye" onClick={togglePassword}></i>
-            )}
+            {showPassword ? "🙈" : "👁️"}
           </button>
         </div>
         <div className="flex justify-end">

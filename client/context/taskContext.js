@@ -35,11 +35,9 @@ export const TasksProvider = ({ children }) => {
     const getConfig = () => {
         const token = localStorage.getItem("token");
 
-        if (!token) return;
-
         return {
             headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: token ?`Bearer ${token}` : "",
             }
         }
     }
@@ -66,6 +64,13 @@ export const TasksProvider = ({ children }) => {
 
     //get tasks
     const getTasks = async () => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            console.log("No token found, skipping request");
+            return;
+        }
+
         setLoading(true);
         try {
             const response = await axios.get(`${serverUrl}/api/tasks`, getConfig());
@@ -153,9 +158,10 @@ export const TasksProvider = ({ children }) => {
 //     }
 //    };
     useEffect(() => {
-        getTasks();
-
-    }, []);
+        if (user) {
+            getTasks();
+        }
+    }, [user]);
 
     return (
         <TasksContext.Provider value={{ 

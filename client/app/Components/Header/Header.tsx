@@ -6,6 +6,7 @@ import {
   plusIcon,
   profileIcon,
   sunIcon,
+  loginIcon,
 } from '@/app/utils/icons';
 
 import { useTasks } from '@/context/taskContext';
@@ -40,10 +41,10 @@ function Header() {
 
   return (
     <header>
-      <div className="w-full flex sm:flex-col md:flex-row items-center justify-between px-6 py-4">
+      <div className="w-full flex flex-col gap-3 md:flex-row md:items-center md:justify-between px-6 py-4">
         
         {/* LEFT */}
-        <div className="flex flex-col m-2">
+        <div className="flex flex-col items-center m-2">
           <h1 className="text-2xl font-semibold text-foreground">
             👋 {userId ? `Hello, ${name}!` : 'Welcome to TaskMaster!'}
           </h1>
@@ -65,41 +66,22 @@ function Header() {
         </div>
 
         {/* RIGHT */}
-        <div className="flex xs:mt-3 items-center gap-3">
-
-          {/* Add / Login Button */}
-          {/* <button
-            type="button"
-            className="flex items-center gap-2 cursor-pointer hover:shadow-md"
-            onClick={() => {
-                console.log("Clicked Add Task");
-                console.log("Modal Open: ", isTaskModalOpen);
-                openModalAdd();
-            }}
-          >
-            {user._id ? (
-              <>
-                <span className="pr-1">{plusIcon}</span> Add Task
-              </>
-            ) : (
-              "Login"
-            )}
-          </button> */}
-
+        <div className="flex items-center justify-center gap-2">
+          
           {userId ? (
-            <Button variant="primary" onClick={openModalAdd} className="flex items-center gap-2">
+            <Button variant="primary" onClick={openModalAdd} className="flex items-center text-sm gap-2 md:px-5 md:py-3">
               <span className="pr-1">{plusIcon}</span> Add Task
             </Button>
           ) : (
-            <Button variant="primary" onClick={() => router.push("/login")}>
-              Login
+            <Button variant="primary" onClick={() => router.push("/login")} className="flex items-center text-sm gap-2 md:px-5 md:py-3">
+              <span className="pr-1">{loginIcon}</span> Login
             </Button>
           )}
-
+         
           <Separator orientation="vertical" className="h-6" />
 
           {/* Icons */}
-          <div className="flex items-center gap-2 text-muted-foreground">
+          <div className="flex items-center gap-1 text-muted-foreground">
 
             <Link href="https://github.com" target="_blank">
               <span className="text-muted-foreground text-xl hover:text-foreground transition">

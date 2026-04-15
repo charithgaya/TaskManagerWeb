@@ -12,7 +12,7 @@ function Filters() {
         <span 
             className='absolute top-1 left-1 h-[calc(100%-8px)] bg-primary rounded-md shadow-sm transition-all duration-300'
             style={{
-                width: 'calc(100% /4 - 2px)',
+                width: 'calc(100% /4 - 1px)',
                 transform: `translate(calc(${activeIndex} * 100%))`,
                 // transition: 'transform 300ms cubic-bezier(.95, .03, 1, 1)',
             }}

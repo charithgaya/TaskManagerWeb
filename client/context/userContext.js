@@ -35,6 +35,12 @@ export const UserContextProvider = ({ children }) => {
 
   const getConfig = () => {
         const token = localStorage.getItem("token");
+        console.log("Token from localStorage:", token); // Debugging line
+
+        if (!token) {
+            console.log("No token found");
+            return {};
+        }
 
         return {
             headers: {
@@ -289,7 +295,7 @@ export const UserContextProvider = ({ children }) => {
       toast.success("Password reset successfully");
       setLoading(false);
       // redirect to login page
-       router.push("/login");
+      // router.push("/login");
     } catch (error) {
       console.log("Error resetting password", error);
       toast.error(getErrorMessage(error));
@@ -300,19 +306,26 @@ export const UserContextProvider = ({ children }) => {
   // change password
   const changePassword = async (currentPassword, newPassword) => {
     setLoading(true);
-
+    
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Please Login again!");
+      return;
+    }
     try {
       const res = await axios.patch(
         `${serverUrl}/api/users/change-password`,
-        { currentPassword, newPassword }
+        { currentPassword, newPassword }, getConfig()
       );
 
       toast.success("Password changed successfully");
       setLoading(false);
+      
     } catch (error) {
       console.log("Error changing password", error);
       toast.error(getErrorMessage(error));
       setLoading(false);
+      
     }
   };
 
@@ -370,15 +383,15 @@ export const UserContextProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    const publicRoutes = ["/login", "/register", "/forgot-password", "/reset-password"];
+    const publicRoutes = ["/login", "/register", "/forgot-password"];
 
-    if (!token && !publicRoutes.includes(pathname)) {
+    const isPublic = publicRoutes.includes(pathname) || pathname.startsWith("/reset-password");
+
+    if (!token && !isPublic) {
       router.replace("/login");
     }
 
     setCheckingAuth(false);
-
-    if(checkingAuth) return;
   }, [pathname]);
   
 

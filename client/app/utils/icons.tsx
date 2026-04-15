@@ -1,7 +1,10 @@
 import { FaGithub, FaStar, FaTrash, FaEdit, FaCheck, FaTimes, FaPlus, FaSun, FaMoon, FaHome } from "react-icons/fa";
 import { FaUser, FaCertificate } from "react-icons/fa6";
 import { HiOutlineMail } from "react-icons/hi";
-import { LuLogIn, LuLogOut } from "react-icons/lu";
+import { LuLogIn, LuLogOut, LuMenu } from "react-icons/lu";
+import { IoIosArrowDropleft, IoMdCloseCircleOutline } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
+import { TfiDashboard } from "react-icons/tfi";
 
 export const githubIcon = <FaGithub />;
 export const starIcon = <FaStar />;
@@ -19,3 +22,8 @@ export const badgeIcon = <FaCertificate />;
 export const closeIcon = <FaTimes />;
 export const loginIcon = <LuLogIn />;
 export const logoutIcon = <LuLogOut />;
+export const menuIcon = <LuMenu />;
+export const arrowLeftIcon = <IoIosArrowDropleft />;
+export const closeCircleIcon = <IoMdCloseCircleOutline />;
+export const dashboardIcon = <TfiDashboard />;
+export const closeMenuIcon = <IoClose />;

@@ -87,23 +87,6 @@ export const loginUser = asyncHandler(async (req, res) => {
   // generate token with user id
   const token = generateToken(user._id);
 
-    // if (userExists && isMatch) {
-    //   const { _id, name, email, role, photo, bio, isVerified } = userExists;
-
-    //   // send back the user and token in the response to the client
-    //   res.status(200).json({
-    //     _id,
-    //     name,
-    //     email,
-    //     role,
-    //     photo,
-    //     bio,
-    //     isVerified,
-    //     token,
-    //   });
-    // } else {
-    //   res.status(400).json({ message: "Invalid email or password" });
-    // }
     return res.status(200).json({
       _id: user._id,
       name: user.name,
@@ -318,20 +301,28 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 
   // ✅ SEND EMAIL FIRST
   try {
-    await sendEmail(
-      "Password Reset",
-      user.email,
-      process.env.USER_EMAIL,
-      "noreply@noreply.com",
-      "forgotPassword",
-      user.name,
-      resetLink
-    );
+    // await sendEmail(
+    //   "Password Reset",
+    //   user.email,
+    //   process.env.USER_EMAIL,
+    //   "noreply@noreply.com",
+    //   "forgotPassword",
+    //   user.name,
+    //   resetLink
+    // );
+
+    // return res.json({
+    //   message: "If this email exists, a reset link has been sent",
+    //   resetURL:
+    //     process.env.NODE_ENV === "development" ? resetLink : undefined,
+    // });
+
+    //for testing (no email sending)
+    console.log("Password reset link: ", resetLink);
 
     return res.json({
-      message: "If this email exists, a reset link has been sent",
-      resetURL:
-        process.env.NODE_ENV === "development" ? resetLink : undefined,
+      message: "Reset Link generated (check console in development)",
+      resetURL: resetLink
     });
 
   } catch (error) {
@@ -342,40 +333,6 @@ export const forgotPassword = asyncHandler(async (req, res) => {
     });
   }
 });
-
-// reset password
-// export const resetPassword = asyncHandler(async (req, res) => {
-//   const { resetPasswordToken } = req.params;
-//   const { password } = req.body;
-
-//   if (!password) {
-//     return res.status(400).json({ message: "Password is required" });
-//   }
-
-//   // hash the reset token
-//   const hashedToken = hashToken(resetPasswordToken);
-
-//   // check if token exists and has not expired
-//   const userToken = await Token.findOne({
-//     passwordResetToken: hashedToken,
-//     // check if the token has not expired
-//     expiresAt: { $gt: Date.now() },
-//   });
-
-//   if (!userToken) {
-//     return res.status(400).json({ message: "Invalid or expired reset token" });
-//   }
-
-//   // find user with the user id in the token
-//   const user = await User.findById(userToken.userId);
-
-//   // update user password
-//   user.password = password;
-//   await user.save();
-
-//   return res.status(200).json({ message: "Password reset successfully" });
-// });
-
 
 export const resetPassword = asyncHandler(async (req, res) => {
   const { resetPasswordToken } = req.params;
@@ -448,9 +405,11 @@ export const changePassword = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "Invalid password!" });
   }
 
+  console.log("OLD PASSWORD: ", user.password);
   // reset password
   user.password = newPassword;
   await user.save();
+  console.log("NEW PASSWORD: ", newPassword);
 
   return res.status(200).json({ message: "Password changed successfully"
   

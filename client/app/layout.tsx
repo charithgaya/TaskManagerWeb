@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-//import { Geist, Geist_Mono } from "next/font/google";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { UserContextProvider } from "@/context/userContext.js";
@@ -23,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-
+  
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen bg-background text-foreground transition-colors duration-300`}>
@@ -32,35 +31,36 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <TasksProvider>
               <ClientProviders>
                 <Toaster position="top-center" />
-                <div className="min-h-screen flex">
-
-                  {/*Left mini sidebar */}
-                  <MiniSideBar />
                 
-                  {/* Main Area */}
-                  <div className="flex flex-1 flex-col">
-                    <Header />
+                  <div className="min-h-screen flex">
 
-                      {/* Content + Right sidebar */}
-                    <div className="flex flex-1">
+                    <SideBarProvider>
+                      {/*Left mini sidebar */}
+                      <MiniSideBar />
+                
+                      {/* Main Area */}
+                      <div className="flex flex-1">
+                        <div className="flex flex-1 flex-col">
+                          <Header />
 
-                      {/* Main content area */}
-                      <div className="flex-1 p-4">
+                          {/* Content + Right sidebar */}
+                          <div className="flex flex-1">
 
-                        <MainContentLayout>
-                          <MainLayout>
-                            {children}
-                          </MainLayout>
-                        </MainContentLayout>
-
+                            {/* Main content area */}
+                            <div className="flex-1 p-4">
+                              <MainContentLayout>
+                                <MainLayout>
+                                  {children}
+                                </MainLayout>
+                              </MainContentLayout>
+                            </div>
+                          {/* Right sidebar */}
+                          {/* (SideBar already inside provider) */}
+                          </div>
+                        </div>
                       </div>
-
-                      {/* Right sidebar */}
-                        <SideBarProvider />
-                    </div>
+                    </SideBarProvider>
                   </div>
-                </div>
-                
               </ClientProviders>
             </TasksProvider>
           </UserContextProvider>
@@ -70,18 +70,3 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   );
 }
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
-{/* <body
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-    >
-      {children}
-    </body> */}

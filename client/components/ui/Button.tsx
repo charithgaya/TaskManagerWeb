@@ -15,7 +15,7 @@ export default function Button({ variant = "primary", className, ...props }: any
   return (
     <button
       className={cn(
-        "px-4 py-2 rounded-xl transition",
+        "px-3 py-2 rounded-xl transition",
         variants[variant as keyof typeof variants],
         className
       )}
