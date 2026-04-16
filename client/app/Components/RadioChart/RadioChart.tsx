@@ -62,9 +62,9 @@ function RadialChart() {
     <Card className="flex flex-col hover:shadow-md transition border-border">
       {/* ✅ Removed all hardcoded colors */}
 
-      <CardHeader className="items-center pb-2 text-center">
+      <CardHeader className="flex flex-col items-center pb-2 text-center">
         <CardTitle>Completed vs Pending Tasks</CardTitle>
-        <CardDescription>Task completion status</CardDescription>
+        <CardDescription>Percentage of completion status</CardDescription>
       </CardHeader>
 
       <CardContent className="flex flex-1 items-center justify-center pb-0">

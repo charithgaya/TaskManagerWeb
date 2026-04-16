@@ -1,4 +1,4 @@
-import { FaGithub, FaStar, FaTrash, FaEdit, FaCheck, FaTimes, FaPlus, FaSun, FaMoon, FaHome } from "react-icons/fa";
+import { FaGithub, FaStar, FaTrash, FaEdit, FaCheck, FaTimes, FaPlus, FaSun, FaMoon, FaHome, FaEye, FaEyeSlash } from "react-icons/fa";
 import { FaUser, FaCertificate } from "react-icons/fa6";
 import { HiOutlineMail } from "react-icons/hi";
 import { LuLogIn, LuLogOut, LuMenu } from "react-icons/lu";
@@ -27,3 +27,5 @@ export const arrowLeftIcon = <IoIosArrowDropleft />;
 export const closeCircleIcon = <IoMdCloseCircleOutline />;
 export const dashboardIcon = <TfiDashboard />;
 export const closeMenuIcon = <IoClose />;
+export const eyeIcon = <FaEye />;
+export const eyeSlashIcon = <FaEyeSlash />;

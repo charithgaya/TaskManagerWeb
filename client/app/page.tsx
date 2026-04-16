@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { container, item } from "@/app/utils/animations";
 import Button from "@/components/ui/Button";
+import { plusIcon } from "./utils/icons";
 //import ProtectedRoute from "./Components/ProtectedRoute";
 
 export default function Home() {
@@ -23,9 +24,13 @@ export default function Home() {
   
   return (
     <main className="m-6 h-full transition-colors duration-300">
-        <div className="flex sm:flex-col md:flex-row justify-between items-center">
-          <h1 className="text-xl sm:text-md xs:text-sm sm:text-center font-semibold text-foreground sm:mb-4">All Tasks</h1>
-          <Filters />
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center md:gap-0">
+          <h1 className="text-lg md:text-2xl font-semibold text-foreground mb-2">
+            All Tasks
+          </h1>
+          <div className="w-full md:max-w-[400px]">
+            <Filters />
+          </div>
         </div>
 
       <motion.div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4"
@@ -42,10 +47,12 @@ export default function Home() {
           <Button
             variant="outline"
             onClick={openModalAdd}
-            className="w-full min-h-[200px] min-w-[200px] border-2 border-dashed border-gray-500 h-full flex items-center justify-center text-foreground"
-          >
-            + Add New Task
+            className="w-full h-full min-h-[200px] min-w-[200px] border-2 border-dashed border-border rounded-2xl p-6 flex flex-col items-center justify-center text-muted-foreground hover:bg-muted/40 transition cursor-pointer"
+            >
+            <span className="text-xl mb-2">{plusIcon}</span>
+            <p className="text-sm font-medium">Add New Task</p>
           </Button>
+
         </motion.div>
       </motion.div>
     </main>

@@ -37,6 +37,7 @@ export const protect = asyncHandler(async (req, res, next) => {
     req.user = user;
 
     next();
+
   } catch (error) {
     // 401 Unauthorized
     return res.status(401).json({ message: "Not authorized, token failed!" });
@@ -46,6 +47,7 @@ export const protect = asyncHandler(async (req, res, next) => {
 // admin middleware
 export const adminMiddleware = asyncHandler(async (req, res, next) => {
   if (req.user && req.user.role === "admin") {
+
     // if user is admin, move to the next middleware/controller
     next();
     return;
@@ -59,6 +61,7 @@ export const creatorMiddleware = asyncHandler(async (req, res, next) => {
     (req.user && req.user.role === "creator") ||
     (req.user && req.user.role === "admin")
   ) {
+    
     // if user is creator, move to the next middleware/controller
     next();
     return;

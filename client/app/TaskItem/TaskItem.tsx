@@ -23,11 +23,11 @@ function TaskItem({ task }: TaskItemProps) {
   const getPriorityVariant = (priority: string) => {
     switch (priority) {
       case "low":
-        return "bg-green-100 text-green-700 dark:bg-green-500 dark:text-black";
+        return "bg-green-500/10 text-green-400";
       case "medium":
-        return "bg-yellow-100 text-yellow-700 dark:bg-yellow-400 dark:text-black";
+        return "bg-yellow-500/10 text-yellow-400";
       case "high":
-        return "bg-red-100 text-red-700 dark:bg-red-500 dark:text-black";
+        return "bg-red-500/10 text-red-400";
       default:
         return "bg-muted text-muted-foreground";
     }
@@ -36,7 +36,7 @@ function TaskItem({ task }: TaskItemProps) {
   const getBorderColor = (priority: string) => {
     switch (priority) {
       case "low": return "border-green-500";
-      case "medium": return "border-yellow-400";
+      case "medium": return "border-yellow-500";
       case "high": return "border-red-500";
       default: return "border-border";
     }
@@ -45,23 +45,25 @@ function TaskItem({ task }: TaskItemProps) {
   return (
     <motion.div variants={item}>
       <Card
-        className={`h-full flex flex-col border-l-4 ${getBorderColor(task.priority)} 
+        className={`h-full flex flex-col border-l-4 pl-2 ${getBorderColor(task.priority)} 
         hover:shadow-md transition hover:-translate-y-1`}
       >
 
         {/* Content */}
         <CardContent className="space-y-3 flex-1">
 
-          <h4 className="text-lg font-semibold text-card-foreground line-clamp-3">
+          {/* <h3 className="text-lg font-semibold text-card-foreground line-clamp-3"> */}
+          <h3 className="text-base sm:text-lg font-semibold text-foreground">
             {task.title}
-          </h4>
+          </h3>
 
-          <p className="text-sm text-muted-foreground line-clamp-3">
+          {/* <p className="text-sm text-muted-foreground line-clamp-3"> */}
+          <p className="text-sm text-muted-foreground leading-relaxed">
             {task.description}
           </p>
 
           {/* Date + Priority */}
-          <div className="flex items-center justify-between pt-2 text-sm">
+          <div className="flex items-center justify-between text-xs sm:text-sm text-muted-foreground">
             <span className="text-muted-foreground">
               {formatTime(new Date(task.createdAt).toISOString())}
             </span>
@@ -76,20 +78,22 @@ function TaskItem({ task }: TaskItemProps) {
         </CardContent>
 
         {/* Actions */}
-        <CardFooter className="flex justify-end gap-3 mt-auto pt-1">
+        <CardFooter className="flex items-center justify-center gap-3 pt-2">
 
           <button
             type='button'
-            className={`transition hover:scale-110 
+            className={`p-1 rounded-md hover:bg-muted transition 
               ${task.completed ? "text-yellow-500" : "text-muted-foreground"}`}
           >
-            {starIcon}
+            <span className='text-lg'>
+              {starIcon}
+            </span>
           </button>
 
           <button
             type='button'
 
-            className="text-primary hover:scale-110 transition"
+            className="text-primary p-1 rounded-md hover:bg-muted transition"
             onClick={() => {
               getTask(task._id);
               openModalEdit(task);
@@ -101,7 +105,7 @@ function TaskItem({ task }: TaskItemProps) {
           <button
             type='button'
             onClick={() => deleteTask(task._id)}
-            className="text-destructive hover:scale-110 transition"
+            className="text-destructive p-1 rounded-md hover:bg-muted transition"
           >
             {trashIcon}
           </button>

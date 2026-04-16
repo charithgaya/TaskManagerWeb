@@ -18,9 +18,9 @@ function Profile() {
       {/* Profile Card */}
       <Card
         onClick={openProfileModal}
-        className="cursor-pointer hover:shadow-md transition border-border"
+        className="cursor-pointer hover:shadow-md"
       >
-        <CardContent className="flex items-center gap-4 p-4">
+        <CardContent className="flex items-center gap-4 p-2">
 
           <img
             src="/ProfilePic.jpg"
@@ -41,8 +41,8 @@ function Profile() {
       </Card>
 
       {/* Stats */}
-      <Card className='hover:shadow-md transition border-border'>
-        <CardContent className="grid grid-cols-2 gap-6 p-4">
+      <Card className='hover:shadow-md'>
+        <CardContent className="grid grid-cols-2 gap-4">
 
           {/* Total */}
           <div className='flex flex-col items-center justify-center'>

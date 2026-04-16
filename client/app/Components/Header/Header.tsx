@@ -41,15 +41,15 @@ function Header() {
 
   return (
     <header>
-      <div className="w-full flex flex-col gap-3 md:flex-row md:items-center md:justify-between px-6 py-4">
+      <div className="w-full flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:px-6 md:py-2 px-1 py-1">
         
         {/* LEFT */}
-        <div className="flex flex-col items-center m-2">
-          <h1 className="text-2xl font-semibold text-foreground">
+        <div className="flex flex-col items-center m-2 md:items-start">
+          <h1 className="text-xl sm:text-2xl font-semibold text-foreground line-clamp-1">
             👋 {userId ? `Hello, ${name}!` : 'Welcome to TaskMaster!'}
           </h1>
 
-          <p className="text-sm text-center text-muted-foreground">
+          <p className="text-sm text-center text-muted-foreground m-1 md:text-left">
             {userId ? (
               <>
                 🤗 You have{" "}
@@ -69,14 +69,22 @@ function Header() {
         <div className="flex items-center justify-center gap-2">
           
           {userId ? (
-            <Button variant="primary" onClick={openModalAdd} className="flex items-center text-sm gap-2 md:px-5 md:py-3">
+            <Button variant="primary" onClick={openModalAdd} className="md:flex hidden items-center text-sm gap-2 md:px-5 md:py-3 min-w-[130px]">
               <span className="pr-1">{plusIcon}</span> Add Task
             </Button>
           ) : (
-            <Button variant="primary" onClick={() => router.push("/login")} className="flex items-center text-sm gap-2 md:px-5 md:py-3">
+            <Button variant="primary" onClick={() => router.push("/login")} className="md:flex hidden items-center text-sm gap-2 md:px-5 md:py-3 min-w-[100px]">
               <span className="pr-1">{loginIcon}</span> Login
             </Button>
           )}
+
+          <button 
+            type='button'
+            className="fixed bottom-6 right-6 text-2xl md:hidden flex items-center justify-center w-14 h-14 rounded-full bg-primary text-white shadow-lg hover:scale-105 active:scale-95 transition"
+            onClick={openModalAdd}
+          >
+            {plusIcon}
+          </button>
          
           <Separator orientation="vertical" className="h-6" />
 
@@ -92,13 +100,18 @@ function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="text-muted-foreground text-xl hover:text-foreground transition"
+              className="text-muted-foreground pl-6 text-xl hover:text-foreground transition"
               onClick={toggleDarkMode}
             >
               {theme === "dark" ? sunIcon : moonIcon}
             </Button>
             
-            <Button variant="ghost" size="icon" className={`text-muted-foreground text-xl hover:text-foreground transition ${user._id ? "" : "hidden"}`} onClick={openProfileModal}>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className={`text-muted-foreground text-xl hover:text-foreground transition ${user._id ? "" : "hidden"}`} 
+              onClick={openProfileModal}
+            >
               {profileIcon}
             </Button>
           </div>

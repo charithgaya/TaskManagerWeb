@@ -11,6 +11,7 @@ import MainLayout from "@/providers/MainLayout";
 import { TasksProvider } from "@/context/taskContext";
 import ThemeProvider from "@/providers/ThemeProvider";
 import ClientProviders from "@/providers/ClientProviders";
+import ProfileUserModal from "./Components/Profile/ProfileUserModal";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -47,10 +48,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                           <div className="flex flex-1">
 
                             {/* Main content area */}
-                            <div className="flex-1 p-4">
+                            <div className="flex-1 p-4 md:p-5 lg:p-6">
                               <MainContentLayout>
                                 <MainLayout>
                                   {children}
+                                  <ProfileUserModal />
                                 </MainLayout>
                               </MainContentLayout>
                             </div>

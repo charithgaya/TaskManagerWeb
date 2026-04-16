@@ -2,6 +2,7 @@
 import Button from "@/components/ui/Button";
 import { useUserContext } from "@/context/userContext";
 import React from "react";
+import { eyeIcon, eyeSlashIcon } from "@/app/utils/icons";
 
 function LoginForm() {
   const { loginUser, userState, handlerUserInput } = useUserContext();
@@ -62,7 +63,7 @@ function LoginForm() {
             className="absolute right-3 top-9 text-sm text-gray-500"
             onClick={togglePassword}
           >
-            {showPassword ? "🙈" : "👁️"}
+            {showPassword ? eyeSlashIcon : eyeIcon}
           </button>
         </div>
         <div className="flex justify-end">

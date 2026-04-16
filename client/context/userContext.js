@@ -35,10 +35,10 @@ export const UserContextProvider = ({ children }) => {
 
   const getConfig = () => {
         const token = localStorage.getItem("token");
-        console.log("Token from localStorage:", token); // Debugging line
+        // console.log("Token from localStorage:", token); // Debugging line
 
         if (!token) {
-            console.log("No token found");
+            // console.log("No token found");
             return {};
         }
 
@@ -313,7 +313,7 @@ export const UserContextProvider = ({ children }) => {
       return;
     }
     try {
-      const res = await axios.patch(
+        await axios.patch(
         `${serverUrl}/api/users/change-password`,
         { currentPassword, newPassword }, getConfig()
       );

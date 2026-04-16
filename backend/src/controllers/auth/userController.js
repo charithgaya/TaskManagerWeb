@@ -18,7 +18,7 @@ export const registerUser = asyncHandler(async (req, res) => {
   }
 
   // check password length
-  if (password.length < 6) {
+  if (!password || password.length < 6) {
     return res
       .status(400)
       .json({ message: "Password must be at least 6 characters" });
@@ -126,11 +126,23 @@ export const updateUser = asyncHandler(async (req, res) => {
 
   if (user) {
     // user properties to update
-    const { name, bio, photo } = req.body;
+    const { name, email, bio, photo } = req.body;
+
     // update user properties
     user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
     user.bio = req.body.bio || user.bio;
     user.photo = req.body.photo || user.photo;
+
+    // Avoid duplicate email error
+    if (email && email !== user.email) {
+
+      const emailExists = await User.findOne({ email });
+      if (emailExists) {
+        return res.status(400).json({ message: "Email already in use" });
+      }
+      user.email = email;
+    }
 
     const updated = await user.save();
 
@@ -395,6 +407,12 @@ export const changePassword = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "All fields are required" });
   }
 
+  if (!newPassword || newPassword.length < 6) {
+    return res
+      .status(400)
+      .json({ message: "Password must be at least 6 characters" });
+  }
+
   //find user by id
   const user = await User.findById(req.user._id);
 
@@ -405,11 +423,9 @@ export const changePassword = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "Invalid password!" });
   }
 
-  console.log("OLD PASSWORD: ", user.password);
   // reset password
   user.password = newPassword;
   await user.save();
-  console.log("NEW PASSWORD: ", newPassword);
 
   return res.status(200).json({ message: "Password changed successfully"
   
