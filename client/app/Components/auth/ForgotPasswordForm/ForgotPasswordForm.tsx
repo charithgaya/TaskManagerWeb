@@ -37,7 +37,7 @@ function ForgotPasswordForm() {
       <div className="space-y-6">
 
         <div className="space-y-1 text-center">
-          <h1 className="text-xl font-semibold text-foreground">
+          <h1 className="text-md sm:text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold text-foreground">
               Reset Password
           </h1>
           <p className="text-sm text-muted-foreground">

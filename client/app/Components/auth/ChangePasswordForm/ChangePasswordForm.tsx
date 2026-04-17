@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { useUserContext } from "@/context/userContext";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useState } from "react";
+import { eyeIcon, eyeSlashIcon } from "@/app/utils/icons";
 
 function ChangePasswordForm() {
   const { changePassword } = useUserContext();
@@ -39,7 +40,7 @@ function ChangePasswordForm() {
     <Dialog>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Reset Your Password!</DialogTitle>
+          <DialogTitle className="text-md sm:text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold text-foreground">Reset Your Password!</DialogTitle>
         </DialogHeader>
 
         <form className="relative w-full max-w-md mx-auto p-6 sm:p-8 rounded-2xl bg-card border shadow-sm" onSubmit={handleSubmit}>
@@ -62,7 +63,7 @@ function ChangePasswordForm() {
               onClick={togglePassword}
               className="absolute right-3 top-[36px] text-muted-foreground hover:text-foreground"
             >
-              {showPassword ? "🙈" : "👁️"}
+              {showPassword ? eyeSlashIcon : eyeIcon}
             </Button>
           </div>
 
@@ -84,7 +85,7 @@ function ChangePasswordForm() {
               onClick={togglePassword}
               className="absolute right-3 top-[36px] text-muted-foreground hover:text-foreground"
             >
-              {showPassword ? "🙈" : "👁️"}
+              {showPassword ? eyeSlashIcon : eyeIcon}
             </Button>
           </div>
 
