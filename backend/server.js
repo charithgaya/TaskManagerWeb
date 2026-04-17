@@ -28,6 +28,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
 //routes
 app.use("/api/users", userRoutes);
 
