@@ -43,7 +43,7 @@ function MiniSideBar() {
     }
   ];
   return (
-    <div className='w-14 flex flex-col'>
+    <div className='w-14 xs:w-8 sm:w-10 md:w-12 flex flex-col'>
       <div className='flex items-center justify-center h-20'>
         <Image src="/logo-removebg.png" alt="Logo" width={70} height={70} loading='eager'/>
       </div>

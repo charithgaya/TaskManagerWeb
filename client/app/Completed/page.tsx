@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <main className="m-6 h-full transition-colors duration-300">
       <div className="flex sm:flex-col md:flex-row items-center justify-between">
-        <h1 className="text-xl sm:text-md sm:text-center font-semibold text-foreground">Completed Tasks</h1>
+        <h1 className="text-md md:text-lg lg:text-xl xl:text-xl sm:text-center font-semibold text-foreground">Completed Tasks</h1>
         <Filters />
       </div>
 

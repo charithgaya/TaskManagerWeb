@@ -44,12 +44,12 @@ function Header() {
       <div className="w-full flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:px-6 md:py-2 px-1 py-1">
         
         {/* LEFT */}
-        <div className="flex flex-col items-center m-2 md:items-start">
-          <h1 className="text-xl sm:text-2xl font-semibold text-foreground line-clamp-1">
+        <div className="flex flex-col items-center m-2 p-2 md:items-start">
+          <h1 className="text-md md:text-lg lg:text-xl xl:text-2xl font-semibold text-foreground line-clamp-1">
             👋 {userId ? `Hello, ${name}!` : 'Welcome to TaskMaster!'}
           </h1>
 
-          <p className="text-sm text-center text-muted-foreground m-1 md:text-left">
+          <p className="text-sm sm:text-xs xl:text-base text-center text-muted-foreground m-1 md:text-left">
             {userId ? (
               <>
                 🤗 You have{" "}
