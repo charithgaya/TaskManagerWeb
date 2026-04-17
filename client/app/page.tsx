@@ -28,7 +28,7 @@ export default function Home() {
           <h1 className="text-lg md:text-2xl font-semibold text-foreground mb-2">
             All Tasks
           </h1>
-          <div className="w-full md:max-w-[400px]">
+          <div className="w-full md:max-w-[400px] mt-2 md:mt-1">
             <Filters />
           </div>
         </div>
@@ -47,7 +47,7 @@ export default function Home() {
           <Button
             variant="outline"
             onClick={openModalAdd}
-            className="w-full h-full min-h-[200px] min-w-[200px] border-2 border-dashed border-border rounded-2xl p-6 flex flex-col items-center justify-center text-muted-foreground hover:bg-muted/40 transition cursor-pointer"
+            className="w-full h-full min-h-[200px] min-w-[200px] border-2 border-dashed border-border rounded-2xl p-6 flex flex-col items-center justify-center text-muted-foreground hover:bg-muted/40 hover:scale-105 transition cursor-pointer"
             >
             <span className="text-xl mb-2">{plusIcon}</span>
             <p className="text-sm font-medium">Add New Task</p>

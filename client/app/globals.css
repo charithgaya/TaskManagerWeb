@@ -8,7 +8,7 @@
   --radius: 0.625rem;
 
   /* Base */
-  --background: 0 0% 100%;
+  --background: 270 20% 96%; /* Soft lavender background */
   --foreground: 222 47% 11%;
 
   /* Card */
@@ -21,14 +21,14 @@
 
   /* ✅ PRIMARY (Purple Theme) */
   --primary: 262 83% 58%;          /* nice purple */
-  --primary-foreground: 0 0% 100%;
+  --primary-foreground: 0 0% 100%; /* white for contrast */
 
   /* Secondary */
   --secondary: 210 40% 96%;
   --secondary-foreground: 222 47% 11%;
 
   /* Muted */
-  --muted: 210 40% 96%;
+  --muted: 270 20% 94%;
   --muted-foreground: 215 16% 47%;
 
   /* Accent */
@@ -40,7 +40,7 @@
   --destructive-foreground: 0 0% 100%;
 
   /* Borders */
-  --border: 214 32% 91%;
+  --border: 270 15% 88%;
   --input: 214 32% 91%;
   --ring: 262 83% 58%;
 
@@ -132,6 +132,7 @@
 body {
   font-family: "Inter", sans-serif;
   @apply bg-background text-foreground;
+  background-image: radial-gradient(circle at top, rgba(139, 92, 246, 0.08), transparent 60%);
 }
 
 /* .auth-page {

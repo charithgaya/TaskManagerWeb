@@ -40,7 +40,7 @@ function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
       data-slot="card-title"
       className={cn(
         "font-semibold leading-tight",
-        "text-base sm:text-lg", // responsive text
+        "text-md sm:text-lg md:text-lg lg:text-xl xl:text-xl", // responsive text
         className
       )}
       {...props}
@@ -54,7 +54,7 @@ function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-description"
       className={cn(
-        "text-sm text-muted-foreground",
+        "text-md text-muted-foreground",
         "line-clamp-2", // prevents overflow on mobile
         className
       )}
