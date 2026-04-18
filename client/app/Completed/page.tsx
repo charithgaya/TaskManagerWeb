@@ -23,8 +23,8 @@ export default function Home() {
   }}, [])
   return (
     <main className="m-6 h-full transition-colors duration-300">
-      <div className="flex sm:flex-col md:flex-row items-center justify-between">
-        <h1 className="text-md sm:text-lg md:text-lg lg:text-xl xl:text-2xl sm:text-center font-semibold text-foreground">Completed Tasks</h1>
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center md:gap-0">
+        <h1 className="text-lg md:text-2xl font-semibold text-foreground mb-2">Completed Tasks</h1>
         <div className="w-full md:max-w-[400px] mt-2 md:mt-1">
           <Filters />
         </div>
