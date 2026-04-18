@@ -256,6 +256,7 @@ export const UserContextProvider = ({ children }) => {
 
       toast.success("If the email exists, a reset link has been sent");
     
+      console.log("FULL RESPONSE: ", res.data);
       return res.data; 
 
     } catch (error) {
@@ -271,10 +272,10 @@ export const UserContextProvider = ({ children }) => {
     try { 
       const data = await forgotPasswordEmail(email);
 
-      console.log("Reset Link: ", data?.resetLink);
+      console.log("Reset Link: ", data?.resetURL);
 
-      if(data?.resetLink){
-        router.push(data.resetLink); // return the reset link for testing purposes
+      if(data?.resetURL){
+        router.push(data.resetURL); // return the reset link for testing purposes
       }
       
     } catch (error) {
