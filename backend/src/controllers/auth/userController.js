@@ -283,7 +283,7 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email });
 
-  // ✅ Always return same message (security)
+  //  Always return same message (security)
   if (!user) {
     return res.json({
       message: "If this email exists, a reset link has been sent",
@@ -311,7 +311,7 @@ export const forgotPassword = asyncHandler(async (req, res) => {
 
   const resetLink = `${process.env.CLIENT_URL}/reset-password/${passwordResetToken}`;
 
-  // ✅ SEND EMAIL FIRST
+  // SEND EMAIL FIRST
   try {
     // await sendEmail(
     //   "Password Reset",
@@ -350,17 +350,17 @@ export const resetPassword = asyncHandler(async (req, res) => {
   const { resetPasswordToken } = req.params;
   const { password } = req.body;
 
-  // ✅ 1. Validate password
+  //  Validate password
   if (!password || password.length < 6) {
     return res.status(400).json({
       message: "Password must be at least 6 characters",
     });
   }
 
-  // ✅ 2. Hash token (same as when saving)
+  //  Hash token (same as when saving)
   const hashedToken = hashToken(resetPasswordToken);
 
-  // ✅ 3. Find valid token
+  //  Find valid token
   const userToken = await Token.findOne({
     passwordResetToken: hashedToken,
     expiresAt: { $gt: Date.now() },
@@ -372,7 +372,7 @@ export const resetPassword = asyncHandler(async (req, res) => {
     });
   }
 
-  // ✅ 4. Find user
+  // Find user
   const user = await User.findById(userToken.userId);
 
   if (!user) {
@@ -381,7 +381,7 @@ export const resetPassword = asyncHandler(async (req, res) => {
     });
   }
 
-  // ✅ 5. Update password
+  //  Update password
   user.password = password; // (hashed in model pre-save)
   await user.save();
 

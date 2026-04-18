@@ -67,7 +67,7 @@ export const TasksProvider = ({ children }) => {
         const token = localStorage.getItem("token");
 
         if (!token) {
-            console.log("No token found, skipping request");
+            // console.log("No token found, skipping request");
             return;
         }
 

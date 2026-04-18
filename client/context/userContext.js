@@ -35,7 +35,7 @@ export const UserContextProvider = ({ children }) => {
 
   const getConfig = () => {
         const token = localStorage.getItem("token");
-        // console.log("Token from localStorage:", token); // Debugging line
+          console.log("Token from localStorage:", token); // Debugging line
 
         if (!token) {
             // console.log("No token found");
@@ -255,16 +255,8 @@ export const UserContextProvider = ({ children }) => {
       );
 
       toast.success("If the email exists, a reset link has been sent");
-      
-      if(res.data?.resetLink){
-        console.log("Reset Link: ", res.data.resetLink);
-      }
-
-      if(res.data?.token){
-        console.log("Reset Token: ", res.data.token);
-      }
     
-      return res.data; // return the reset link and token for testing purposes
+      return res.data; 
 
     } catch (error) {
       console.log("Error Sending forgot passsword email", error);
@@ -273,10 +265,22 @@ export const UserContextProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
+  };
 
-    const data = await forgotPasswordEmail( email);
-    console.log("Forgot Password Link: ", data.resetLink);
-    router.push(data.resetLink);
+  const handleForgotPassword = async () => {
+    try { 
+      const data = await forgotPasswordEmail(email);
+
+      console.log("Reset Link: ", data?.resetLink);
+
+      if(data?.resetLink){
+        router.push(data.resetLink); // return the reset link for testing purposes
+      }
+      
+    } catch (error) {
+      toast.error("Something went wrong!");
+    }
+
   };
 
 
