@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 
 function ForgotPasswordForm() {
-  const { forgotPasswordEmail } = useUserContext();
+  const { forgotPasswordEmail, handleForgotPassword } = useUserContext();
   // state
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -16,6 +16,8 @@ function ForgotPasswordForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    handleForgotPassword();
 
     if(!email || !email.includes("@")) {
       alert("Please enter a valid email address.");
@@ -57,7 +59,7 @@ function ForgotPasswordForm() {
             value={email}
             onChange={handleEmailChange}
             name="email"
-            placeholder="johnDoe@gmail.com"
+            placeholder="Enter your email"
             className="px-4 py-2 rounded-md border bg-background text-foreground outline-none focus:ring-2 focus:ring-primary"
           />
         </div>
@@ -67,7 +69,7 @@ function ForgotPasswordForm() {
             disabled={loading}
             className="w-full py-2.5 rounded-md bg-primary text-primary-foreground font-medium hover:opacity-90 transition disabled:opacity-50"
             >
-            {loading ? "Sending..." : "Reset Password"}
+            {loading ? "Sending..." : "Set Reset Link"}
           </Button>
       </div>
     </form>
