@@ -46,7 +46,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     const { _id, name, email } = user;
 
     // 201 Created
-    res.status(201).json({
+    return res.status(201).json({
       _id,
       name,
       email,
@@ -112,10 +112,10 @@ export const getUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
 
   if (user) {
-    res.status(200).json(user);
+    return res.status(200).json(user);
   } else {
     // 404 Not Found
-    res.status(404).json({ message: "User not found" });
+    return res.status(404).json({ message: "User not found" });
   }
 });
 
@@ -157,7 +157,7 @@ export const updateUser = asyncHandler(async (req, res) => {
     });
   } else {
     // 404 Not Found
-    res.status(404).json({ message: "User not found" });
+    return res.status(404).json({ message: "User not found" });
   }
 });
 
@@ -174,9 +174,9 @@ export const userLoginStatus = asyncHandler(async (req, res) => {
   try {
     // verify the token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    res.status(200).json(true);
+    return res.status(200).json(true);
   } catch {
-    res.status(401).json(false);
+    return res.status(401).json(false);
   }
 });
 
@@ -270,7 +270,7 @@ export const verifyUser = asyncHandler(async (req, res) => {
   // update user to verified
   user.isVerified = true;
   await user.save();
-  res.status(200).json({ message: "User verified" });
+  return res.status(200).json({ message: "User verified" });
 });
 
 // forgot password
