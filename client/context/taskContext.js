@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 const TasksContext = createContext();
 
-const serverUrl = "http://localhost:8000";
+const serverUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const TasksProvider = ({ children }) => {
 
