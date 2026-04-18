@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 export const UserContext = React.createContext();
 
 export const UserContextProvider = ({ children }) => {
-  const serverUrl = "http://localhost:8000";
+  const serverUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const router = useRouter();
 
