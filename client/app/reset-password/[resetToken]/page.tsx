@@ -20,7 +20,7 @@ function ResetPasswordPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const serverUrl = "http://localhost:8000";
+  const serverUrl = process.env.NEXT_PUBLIC_API_URL;
 
   if (!token) {
     return toast.error("Invalid reset link!");
@@ -29,7 +29,7 @@ function ResetPasswordPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // ✅ validation
+    // validation
     if (!password || password.length < 6) {
       return toast.error("Password must be at least 6 characters");
     }

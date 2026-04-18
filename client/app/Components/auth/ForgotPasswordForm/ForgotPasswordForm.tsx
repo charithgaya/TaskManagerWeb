@@ -44,7 +44,7 @@ function ForgotPasswordForm() {
               Enter your email address to receive a password reset link.
           </p>
           <p className="text-xs text-muted-foreground">
-            We’ll send a reset link to your email
+            We’ll send a reset link to your email "for testing purposes" (no actual email will be sent).
           </p>
         </div>
 

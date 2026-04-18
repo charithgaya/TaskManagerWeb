@@ -385,13 +385,13 @@ export const resetPassword = asyncHandler(async (req, res) => {
   user.password = password; // (hashed in model pre-save)
   await user.save();
 
-  // ✅ 6. DELETE all tokens for safety
+  // DELETE all tokens for safety
   await Token.deleteMany({ userId: user._id });
 
   const token = generateToken(user._id);
   console.log("Generated JWT token: ", token);
 
-  // ✅ 7. Success response
+  // Success response
   return res.status(200).json({
     message: "Password reset successfully",
     token,
