@@ -1,4 +1,5 @@
 "use client";
+import { eyeIcon, eyeSlashIcon } from '@/app/utils/icons';
 import Button from "@/components/ui/Button";
 import { useUserContext } from "@/context/userContext";
 import React from "react";
@@ -71,12 +72,9 @@ function RegisterForm() {
           <button
             type="button"
             className="absolute right-3 top-[38px] text-muted-foreground hover:text-foreground"
+            onClick={togglePassword}
           >
-            {showPassword ? (
-              <i className="fas fa-eye-slash" onClick={togglePassword}></i>
-            ) : (
-              <i className="fas fa-eye" onClick={togglePassword}></i>
-            )}
+             {showPassword ? eyeSlashIcon : eyeIcon}
           </button>
         </div>
 

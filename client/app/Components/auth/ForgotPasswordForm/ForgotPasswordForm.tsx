@@ -4,6 +4,7 @@ import { useUserContext } from "@/context/userContext";
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
+import { Label } from "@/components/ui/label";
 
 function ForgotPasswordForm() {
   const { forgotPasswordEmail } = useUserContext();
@@ -50,20 +51,20 @@ function ForgotPasswordForm() {
 
         <div className="space-y-1 text-center">
           <h1 className="text-md sm:text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold text-foreground">
-              Reset Password
+              Forget Password
           </h1>
           <p className="text-sm text-muted-foreground">
               Enter your email address to receive a password reset link.
           </p>
-          <p className="text-xs text-muted-foreground">
-            We’ll send a reset link to your email "for testing purposes" (no actual email will be sent).
+          <p className="text-xs text-primary text-center">
+            We’ll send a reset link to your email (for testing purposes, no actual email will be sent).
           </p>
         </div>
 
         <div className="space-y-1">
-          <label htmlFor="email" className="text-sm text-muted-foreground">
+          <Label htmlFor="email" className="text-sm text-muted-foreground">
             Email
-          </label>
+          </Label>
           <Input
             type="email"
             value={email}

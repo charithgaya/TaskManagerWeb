@@ -8,7 +8,6 @@ import { eyeIcon, eyeSlashIcon } from "@/app/utils/icons";
 import { Input } from "@/components/ui/input";
 import Button from "@/components/ui/Button";
 import { Card } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogTitle, DialogHeader } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 
 function ResetPasswordPage() {
@@ -85,129 +84,71 @@ function ResetPasswordPage() {
   }
 
   return (
-    // <div className="min-h-screen flex items-center justify-center bg-background px-4">
-    //   <form
-    //     onSubmit={handleSubmit}
-    //     className="w-full max-w-md bg-card p-6 sm:p-8 rounded-2xl shadow-sm space-y-6"
-    //   >
-    //     {/* Title */}
-    //     <div className="text-center space-y-1">
 
-    //       <h1 className="text-xl font-semibold text-foreground">
-    //         Set New Password
-    //       </h1>
-    //     </div>
-
-    //     <Input
-    //       type="password"
-    //       value={password}
-    //       onChange={(e) => setPassword(e.target.value)}
-    //       placeholder="New password"
-    //     />
-        
-    //      <Button
-    //         type="button"
-    //         onClick={togglePassword}
-    //         className="absolute right-3 top-[36px] text-muted-foreground hover:text-foreground"
-    //       >
-    //         {showPassword ? eyeSlashIcon : eyeIcon}
-    //       </Button>
-        
-    //     <Input
-    //       type="password"
-    //       value={confirmPassword}
-    //       onChange={(e) => setConfirmPassword(e.target.value)}
-    //       placeholder="Confirm password"
-    //     />
-    //       <Button
-    //         type="button"
-    //         onClick={togglePassword}
-    //         className="absolute right-3 top-[36px] text-muted-foreground hover:text-foreground"
-    //       >
-    //         {showPassword ? eyeSlashIcon : eyeIcon}
-    //       </Button>
+  <form 
+    className="relative w-full max-w-md mx-auto p-6 sm:p-8 rounded-2xl bg-card shadow-sm" 
+    onSubmit={handleSubmit}
+  >
+    <div className="relative z-10 space-y-6">
+      <div className="text-center space-y-1">
+        <h1 className="text-md sm:text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold text-foreground">
+          Set new Password
+        </h1>
+      </div>
+      {/* New Password */}
+      <div className="relative flex flex-col gap-1">
+        <Label className="text-sm text-muted-foreground">
+          New Password
+        </Label>
+        <Input
+          type={showPassword ? "text" : "password"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="*********"
+          className="px-4 py-2 rounded-md border bg-background text-foreground outline-none focus:ring-2 focus:ring-primary"
+          required
+        />
+        <button
+          type="button"
+          onClick={togglePassword}
+          className="absolute right-3 top-9 text-sm text-gray-500"
+        >
+          {showPassword ? eyeSlashIcon : eyeIcon}
+        </button>
+      </div>
+      {/* Confirm New Password */}
+      <div className="relative flex flex-col gap-1">
+        <Label className="text-sm text-muted-foreground">
+          Confirm New Password
+        </Label>
+        <Input
+          type={showPassword ? "text" : "password"}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          placeholder="*********"
+          className="px-4 py-2 rounded-md border bg-background text-foreground outline-none focus:ring-2 focus:ring-primary"
+          required
+        />
+        <button
+          type="button"
+          onClick={togglePassword}
+          className="absolute right-3 top-9 text-sm text-gray-500"
+        >
+          {showPassword ? eyeSlashIcon : eyeIcon}
+        </button>
+      </div>
+      {/* Submit */}
+      <Button
+        type="submit"
+        onClick={handleSubmit}
+        className="w-full py-2.5 font-medium bg-primary text-primary-foreground rounded-md hover:opacity-90 transition disabled:opacity-50"
+        disabled={loading}
+      >
+        Reset
+      </Button>
+    </div>
+  </form>
       
-    //     <Button
-    //       type="submit"
-    //       disabled={loading}
-    //       className="w-full"
-    //     >
-    //        Reset Password
-    //     </Button>
-    //   </form>
-    // </div>
-
-    <Dialog>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle className="text-md sm:text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold text-foreground">
-            Reset Your Password!
-          </DialogTitle>
-        </DialogHeader>
-
-        <form className="relative w-full max-w-md mx-auto p-6 sm:p-8 rounded-2xl bg-card border shadow-sm" onSubmit={handleSubmit}>
-          
-          {/* New Password */}
-          <div className="relative flex flex-col gap-1">
-
-            <Label className="text-sm text-muted-foreground">
-              Set new Password
-            </Label>
-
-            <Input
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="*********"
-              className="px-4 py-2 rounded-md border bg-background text-foreground outline-none focus:ring-2 focus:ring-primary"
-            />
-
-            <Button
-              type="button"
-              onClick={togglePassword}
-              className="absolute right-3 top-[36px] text-muted-foreground hover:text-foreground"
-            >
-              {showPassword ? eyeSlashIcon : eyeIcon}
-            </Button>
-
-          </div>
-
-          {/* Confirm New Password */}
-          <div className="relative flex flex-col gap-1">
-
-            <Label className="text-sm text-muted-foreground">
-              Confirm New Password
-            </Label>
-
-            <Input
-              type={showPassword ? "text" : "password"}
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="*********"
-              className="px-4 py-2 rounded-md border bg-background text-foreground outline-none focus:ring-2 focus:ring-primary"
-            />
-
-            <Button
-              type="button"
-              onClick={togglePassword}
-              className="absolute right-3 top-[36px] text-muted-foreground hover:text-foreground"
-            >
-              {showPassword ? eyeSlashIcon : eyeIcon}
-            </Button>
-            
-          </div>
-
-          {/* Submit */}
-          <Button
-              type="submit"
-              onClick={handleSubmit}
-              className="w-full py-2.5 rounded-md bg-primary text-primary-foreground font-medium hover:opacity-90 transition"
-          >
-            Reset Password
-          </Button>
-        </form>
-      </DialogContent>
-    </Dialog>
   );
 }
 
