@@ -273,8 +273,8 @@ export const UserContextProvider = ({ children }) => {
       const data = await forgotPasswordEmail(email);
 
       if(data?.resetURL){
-        console.log("Reset Link: ", data?.resetURL);
-        
+        console.log("Reset Link: ", data.resetURL);
+
         window.location.href =  data.resetURL; // return the reset link for testing purposes
       }
       
