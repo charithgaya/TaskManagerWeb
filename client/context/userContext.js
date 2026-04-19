@@ -21,15 +21,7 @@ export const UserContextProvider = ({ children }) => {
   });
   
   const [loading, setLoading] = useState(false);
-  // const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
-
-  // const openUserProfileModal = () => {
-  //   setIsProfileModalOpen(true);
-  // };
-  // const closeUserProfileModal = () => {
-  //   setIsProfileModalOpen(false);
-  // };
-
+  
   const getErrorMessage = (error) =>
   error.response?.data?.message || error.message || "Something went wrong";
 

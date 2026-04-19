@@ -101,6 +101,7 @@ export const TasksProvider = ({ children }) => {
             
         } catch (error) {
             console.log("Error creating task", error);
+            toast.error("Error creating task");
         }
         setLoading(false);
     };
@@ -118,6 +119,7 @@ export const TasksProvider = ({ children }) => {
 
         } catch (error) {
             console.log("Error updating task", error);
+            toast.error("Error updating task");
         }
     };
 
@@ -126,8 +128,10 @@ export const TasksProvider = ({ children }) => {
         try {
             await axios.delete(`${serverUrl}/api/tasks/${taskId}`, getConfig());
             setTasks(tasks.filter(t => t._id !== taskId));
+            toast.success("Task deleted successfully");
         } catch (error) {
             console.log(error);
+            toast.error("Error deleting task");
         }
     }
 

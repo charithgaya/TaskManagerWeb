@@ -77,6 +77,7 @@ function Modal() {
               value={task.title || ""}
               onChange={(e) => handleInput("title")(e)}
               placeholder="Enter task title"
+              required
             />
           </div>
 
@@ -89,6 +90,7 @@ function Modal() {
               value={task.description || ""}
               onChange={(e) => handleInput("description")(e)}
               placeholder="Enter task description"
+              required
             />
           </div>
 
@@ -100,6 +102,7 @@ function Modal() {
               onValueChange={(value) =>
                 handleInput("priority")({ target: { value } })
               }
+              required
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select priority" />
@@ -120,6 +123,7 @@ function Modal() {
               id="dueDate"
               value={task.dueDate || ""}
               onChange={(e) => handleInput("dueDate")(e)}
+              required
             />
           </div>
 
@@ -133,6 +137,7 @@ function Modal() {
                   target: { value },
                 })
               }
+              required
             >
               <SelectTrigger>
                 <SelectValue placeholder="Task status" />
