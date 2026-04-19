@@ -12,7 +12,7 @@ function RegisterForm() {
   const togglePassword = () => setShowPassword(!showPassword);
 
   return (
-    <form className="relative w-full max-w-md mx-auto p-6 sm:p-8 rounded-2xl bg-card shadow-md">
+    <form className="relative w-full max-w-md mx-auto p-6 sm:p-8 border border-border rounded-2xl bg-card hover:shadow-md">
       <div className="relative z-10 space-y-6">
         <div className="text-center space-y-1">
           <h1 className="text-md sm:text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold text-foreground">

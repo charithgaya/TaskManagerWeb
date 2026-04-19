@@ -86,7 +86,7 @@ function ResetPasswordPage() {
   return (
 
   <form 
-    className="relative w-full max-w-md mx-auto p-6 sm:p-8 rounded-2xl bg-card shadow-md" 
+    className="relative w-full max-w-md mx-auto p-6 sm:p-8 rounded-2xl border border-border bg-card hover:shadow-md" 
     onSubmit={handleSubmit}
   >
     <div className="relative z-10 space-y-6">

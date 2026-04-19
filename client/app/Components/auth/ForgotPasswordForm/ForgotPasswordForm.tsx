@@ -46,8 +46,8 @@ function ForgotPasswordForm() {
   return (
     <form
       onSubmit={handleSubmit} 
-      className="rounded-2xl bg-card w-full max-w-md mx-auto p-6 sm:p-8 shadow-sm">
-      <div className="space-y-6">
+      className="relative rounded-2xl border border-border bg-card hover:shadow-md w-full max-w-md mx-auto p-6 sm:p-8">
+      <div className="relative z-10space-y-6">
 
         <div className="space-y-1 text-center">
           <h1 className="text-md sm:text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold text-foreground">
@@ -61,7 +61,7 @@ function ForgotPasswordForm() {
           </p>
         </div>
 
-        <div className="space-y-1">
+        <div className="flex flex-col gap-1">
           <Label htmlFor="email" className="text-sm text-muted-foreground">
             Email
           </Label>
