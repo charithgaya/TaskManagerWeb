@@ -40,16 +40,20 @@ function ChangePasswordForm() {
     <Dialog>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-md sm:text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold text-foreground">Reset Your Password!</DialogTitle>
+          <DialogTitle className="text-md sm:text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold text-foreground">
+            Reset Your Password!
+          </DialogTitle>
         </DialogHeader>
 
         <form className="relative w-full max-w-md mx-auto p-6 sm:p-8 rounded-2xl bg-card border shadow-sm" onSubmit={handleSubmit}>
           
           {/* Current Password */}
           <div className="relative flex flex-col gap-1">
+
             <Label className="text-sm text-muted-foreground">
               Current Password
             </Label>
+
             <Input
               type={showPassword ? "text" : "password"}
               value={currentPassword}
@@ -65,13 +69,16 @@ function ChangePasswordForm() {
             >
               {showPassword ? eyeSlashIcon : eyeIcon}
             </Button>
+
           </div>
 
           {/* New Password */}
           <div className="relative flex flex-col gap-1">
+
             <Label className="text-sm text-muted-foreground">
               New Password
             </Label>
+
             <Input
               type={showPassword ? "text" : "password"}
               value={newPassword}
@@ -87,6 +94,7 @@ function ChangePasswordForm() {
             >
               {showPassword ? eyeSlashIcon : eyeIcon}
             </Button>
+            
           </div>
 
           {/* Submit */}

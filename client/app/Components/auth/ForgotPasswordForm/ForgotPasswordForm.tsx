@@ -4,7 +4,6 @@ import { useUserContext } from "@/context/userContext";
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
-import { useRouter } from "next/dist/client/components/navigation";
 
 function ForgotPasswordForm() {
   const { forgotPasswordEmail, handleForgotPassword } = useUserContext();

@@ -329,9 +329,6 @@ export const forgotPassword = asyncHandler(async (req, res) => {
     //     process.env.NODE_ENV === "development" ? resetLink : undefined,
     // });
 
-    //for testing (no email sending)
-    console.log("Password reset link: ", resetLink);
-
     return res.json({
       message: "Reset Link generated",
       resetURL: resetLink

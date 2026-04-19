@@ -83,6 +83,7 @@ function ResetPasswordPage() {
       >
         {/* Title */}
         <div className="text-center space-y-1">
+          
           <h1 className="text-xl font-semibold text-foreground">
             Set New Password
           </h1>
@@ -110,7 +111,7 @@ function ResetPasswordPage() {
           disabled={loading}
           className="w-full"
         >
-          {loading ? "Updating..." : "Reset Password"}
+           Reset Password
         </Button>
       </form>
     </div>
