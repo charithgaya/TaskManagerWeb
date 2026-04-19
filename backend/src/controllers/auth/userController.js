@@ -333,7 +333,7 @@ export const forgotPassword = asyncHandler(async (req, res) => {
     console.log("Password reset link: ", resetLink);
 
     return res.json({
-      message: "Reset Link generated (check console in development)",
+      message: "Reset Link generated",
       resetURL: resetLink
     });
 

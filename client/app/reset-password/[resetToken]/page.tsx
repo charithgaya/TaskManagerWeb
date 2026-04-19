@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 
 import { Input } from "@/components/ui/input";
 import Button from "@/components/ui/Button";
+import { Card } from "@/components/ui/card";
 
 function ResetPasswordPage() {
   const router = useRouter();
@@ -19,13 +20,13 @@ function ResetPasswordPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const serverUrl = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     if (!token) {
       toast.error("Invalid reset link!");
-      router.push("/login");
     }
   }, [token]);
   
@@ -49,10 +50,21 @@ function ResetPasswordPage() {
         { password }
       );
 
-      toast.success("Password reset successful 🎉");
+      setSuccess(true);
 
-      localStorage.setItem("token", res.data.token);
-      router.push("/login");
+      if(success) {
+        return (
+          <Card className="items-center justify-center min-h-screen">
+            <h2 className="text-center">Password reset successful 🎉</h2>
+            <Button 
+              className="w-full py-2.5 font-medium bg-primary text-primary-foreground rounded-md hover:opacity-90 transition disabled:opacity-50"
+              onClick={() => router.push("/login")}
+            >
+              Go to Login
+            </Button>
+          </Card>
+        );
+      }
 
     } catch (error: any) {
       toast.error(

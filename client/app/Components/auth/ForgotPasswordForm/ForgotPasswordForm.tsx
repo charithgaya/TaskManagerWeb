@@ -11,7 +11,6 @@ function ForgotPasswordForm() {
   // state
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -30,7 +29,6 @@ function ForgotPasswordForm() {
       setLoading(true);
       await forgotPasswordEmail(email);
       setEmail(""); //clear input
-      router.push("/login");
 
     } catch (error) {
       // console.error("Error sending reset link:", error);
