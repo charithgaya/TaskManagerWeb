@@ -71,15 +71,22 @@ function ResetPasswordPage() {
 
   if(success) {
     return (
-      <Card className="items-center justify-center min-h-screen">
-        <h2 className="text-center">Password reset successful 🎉</h2>
-          <Button 
+      <div className="relative rounded-2xl border border-border bg-card hover:shadow-md w-full max-w-md mx-auto p-6 sm:p-8">
+        <div className="relative z-10 space-y-6">
+          <div className="space-y-1 text-center">
+            <h1 className="text-md sm:text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold text-foreground">
+              Password reset successfull 🎉
+            </h1>
+          </div>
+          <Button
+            type="submit"
             className="w-full py-2.5 font-medium bg-primary text-primary-foreground rounded-md hover:opacity-90 transition disabled:opacity-50"
             onClick={() => router.push("/login")}
           >
-           Go to Login
+            Go to Login
           </Button>
-      </Card>
+        </div>
+      </div>
     );
   }
 

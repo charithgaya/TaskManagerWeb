@@ -47,7 +47,7 @@ function ForgotPasswordForm() {
     <form
       onSubmit={handleSubmit} 
       className="relative rounded-2xl border border-border bg-card hover:shadow-md w-full max-w-md mx-auto p-6 sm:p-8">
-      <div className="relative z-10space-y-6">
+      <div className="relative z-10 space-y-6">
 
         <div className="space-y-1 text-center">
           <h1 className="text-md sm:text-lg md:text-lg lg:text-xl xl:text-2xl font-semibold text-foreground">
