@@ -35,7 +35,7 @@ export const UserContextProvider = ({ children }) => {
 
   const getConfig = () => {
         const token = localStorage.getItem("token");
-          console.log("Token from localStorage:", token); // Debugging line
+          // console.log("Token from localStorage:", token); // Debugging line
 
         if (!token) {
             // console.log("No token found");
@@ -268,29 +268,12 @@ export const UserContextProvider = ({ children }) => {
     }
   };
 
-  const handleForgotPassword = async () => {
-    try { 
-      const data = await forgotPasswordEmail(email);
-
-      if(data?.resetURL){
-        console.log("Reset Link: ", data.resetURL);
-
-        window.location.href =  data.resetURL; // return the reset link for testing purposes
-      }
-      
-    } catch (error) {
-
-      toast.error("Something went wrong!");
-    }
-
-  };
-
   // reset password
   const resetPassword = async (token, password) => {
     setLoading(true);
 
     try {
-      const res = await axios.post(
+      await axios.post(
         `${serverUrl}/api/users/reset-password/${token}`,
         {
           password,
@@ -441,6 +424,7 @@ export const UserContextProvider = ({ children }) => {
         changePassword,
         allUsers,
         deleteUser,
+        handleForgotPassword,
         // isProfileModalOpen,
         // openUserProfileModal,
         // closeUserProfileModal,

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
-
+import { eyeIcon, eyeSlashIcon } from "@/app/utils/icons";
 import { Input } from "@/components/ui/input";
 import Button from "@/components/ui/Button";
 import { Card } from "@/components/ui/card";
@@ -21,6 +21,7 @@ function ResetPasswordPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const serverUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -29,6 +30,10 @@ function ResetPasswordPage() {
       toast.error("Invalid reset link!");
     }
   }, [token]);
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -89,9 +94,6 @@ function ResetPasswordPage() {
           <h1 className="text-xl font-semibold text-foreground">
             Set New Password
           </h1>
-          <p className="text-sm text-muted-foreground">
-            Enter your new password below
-          </p>
         </div>
 
         <Input
@@ -101,12 +103,27 @@ function ResetPasswordPage() {
           placeholder="New password"
         />
         
+         <Button
+            type="button"
+            onClick={togglePassword}
+            className="absolute right-3 top-[36px] text-muted-foreground hover:text-foreground"
+          >
+            {showPassword ? eyeSlashIcon : eyeIcon}
+          </Button>
+        
         <Input
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder="Confirm password"
         />
+          <Button
+            type="button"
+            onClick={togglePassword}
+            className="absolute right-3 top-[36px] text-muted-foreground hover:text-foreground"
+          >
+            {showPassword ? eyeSlashIcon : eyeIcon}
+          </Button>
       
         <Button
           type="submit"

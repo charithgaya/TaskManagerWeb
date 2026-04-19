@@ -25,7 +25,12 @@ function ForgotPasswordForm() {
     }
     try {
       setLoading(true);
-      await forgotPasswordEmail(email);
+      const data = await forgotPasswordEmail(email);
+
+      if(data?.resetURL){
+        console.log("Reset Link: ", data.resetURL);
+        window.location.href = data.resetURL;
+      }
       setEmail(""); //clear input
 
     } catch (error) {
