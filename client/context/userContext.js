@@ -423,8 +423,7 @@ export const UserContextProvider = ({ children }) => {
         resetPassword,
         changePassword,
         allUsers,
-        deleteUser,
-        handleForgotPassword,
+        deleteUser
         // isProfileModalOpen,
         // openUserProfileModal,
         // closeUserProfileModal,
