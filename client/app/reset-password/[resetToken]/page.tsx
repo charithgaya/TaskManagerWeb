@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -14,7 +14,7 @@ function ResetPasswordPage() {
   const params = useParams();
   const token = params?.resetToken as string;
 
-  console.log("TOKEN:", token);
+  // console.log("TOKEN:", token);
   // console.log("PARAMS: ", params);
 
   const [password, setPassword] = useState("");
@@ -45,35 +45,37 @@ function ResetPasswordPage() {
     try {
       setLoading(true);
 
-      const res = await axios.post(
+      await axios.post(
         `${serverUrl}/api/users/reset-password/${token}`,
         { password }
       );
 
       setSuccess(true);
 
-      if(success) {
-        return (
-          <Card className="items-center justify-center min-h-screen">
-            <h2 className="text-center">Password reset successful 🎉</h2>
-            <Button 
-              className="w-full py-2.5 font-medium bg-primary text-primary-foreground rounded-md hover:opacity-90 transition disabled:opacity-50"
-              onClick={() => router.push("/login")}
-            >
-              Go to Login
-            </Button>
-          </Card>
-        );
-      }
-
     } catch (error: any) {
+
       toast.error(
         error?.response?.data?.message || "Something went wrong"
+        
       );
     } finally {
       setLoading(false);
     }
   };
+
+  if(success) {
+    return (
+      <Card className="items-center justify-center min-h-screen">
+        <h2 className="text-center">Password reset successful 🎉</h2>
+          <Button 
+            className="w-full py-2.5 font-medium bg-primary text-primary-foreground rounded-md hover:opacity-90 transition disabled:opacity-50"
+            onClick={() => router.push("/login")}
+          >
+           Go to Login
+          </Button>
+      </Card>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">

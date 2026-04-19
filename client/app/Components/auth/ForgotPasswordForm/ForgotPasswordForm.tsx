@@ -6,9 +6,10 @@ import { Input } from "@/components/ui/input";
 import toast from "react-hot-toast";
 
 function ForgotPasswordForm() {
-  const { forgotPasswordEmail, handleForgotPassword } = useUserContext();
-  // state
+  const { forgotPasswordEmail } = useUserContext();
+
   const [email, setEmail] = useState("");
+
   const [loading, setLoading] = useState(false);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,8 +18,6 @@ function ForgotPasswordForm() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    handleForgotPassword();
 
     if(!email || !email.includes("@")) {
       toast.error("Please enter a valid email address.");

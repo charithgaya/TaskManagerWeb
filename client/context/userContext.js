@@ -272,16 +272,14 @@ export const UserContextProvider = ({ children }) => {
     try { 
       const data = await forgotPasswordEmail(email);
 
-      // console.log("Reset Link: ", data?.resetURL);
-
       if(data?.resetURL){
-        router.push(data.resetURL); // return the reset link for testing purposes
+        console.log("Reset Link: ", data?.resetURL);
+        
+        window.location.href =  data.resetURL; // return the reset link for testing purposes
       }
       
     } catch (error) {
-      console.log("FULL ERROR:", error);
-      console.log("RESPONSE:", error?.response);
-      console.log("DATA:", error?.response?.data);
+
       toast.error("Something went wrong!");
     }
 
@@ -443,7 +441,6 @@ export const UserContextProvider = ({ children }) => {
         changePassword,
         allUsers,
         deleteUser,
-        handleForgotPassword,
         // isProfileModalOpen,
         // openUserProfileModal,
         // closeUserProfileModal,
