@@ -48,6 +48,12 @@ Frontend-Vercel
 Backend-Railway
 Database-MongoDB Atlas
 
+## Live Demo
+https://task-manager-web-j7pt.vercel.app
+
+## API Base URL
+https://taskmanagerweb-production.up.railway.app
+
 #Future Improvements
 
 - Send real password reset emails
