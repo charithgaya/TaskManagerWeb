@@ -3,12 +3,15 @@ import Button from "@/components/ui/Button";
 import { useUserContext } from "@/context/userContext";
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
+import toast from "react-hot-toast";
+import { useRouter } from "next/dist/client/components/navigation";
 
 function ForgotPasswordForm() {
   const { forgotPasswordEmail, handleForgotPassword } = useUserContext();
   // state
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -20,14 +23,20 @@ function ForgotPasswordForm() {
     handleForgotPassword();
 
     if(!email || !email.includes("@")) {
-      alert("Please enter a valid email address.");
+      toast.error("Please enter a valid email address.");
       return;
     }
     try {
       setLoading(true);
       await forgotPasswordEmail(email);
       setEmail(""); //clear input
-    } finally {
+      router.push("/login");
+
+    } catch (error) {
+      // console.error("Error sending reset link:", error);
+      toast.error("Failed to send reset link. Please try again.");
+    }
+    finally {
       setLoading(false);
     }
   };
