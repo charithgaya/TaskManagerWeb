@@ -14,7 +14,7 @@ function ResetPasswordPage() {
   const params = useParams();
   const token = params?.resetToken as string;
 
-  // console.log("TOKEN:", token);
+  console.log("TOKEN:", token);
   // console.log("PARAMS: ", params);
 
   const [password, setPassword] = useState("");
@@ -83,7 +83,7 @@ function ResetPasswordPage() {
       >
         {/* Title */}
         <div className="text-center space-y-1">
-          
+
           <h1 className="text-xl font-semibold text-foreground">
             Set New Password
           </h1>

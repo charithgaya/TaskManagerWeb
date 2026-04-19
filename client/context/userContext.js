@@ -279,6 +279,9 @@ export const UserContextProvider = ({ children }) => {
       }
       
     } catch (error) {
+      console.log("FULL ERROR:", error);
+      console.log("RESPONSE:", error?.response);
+      console.log("DATA:", error?.response?.data);
       toast.error("Something went wrong!");
     }
 
